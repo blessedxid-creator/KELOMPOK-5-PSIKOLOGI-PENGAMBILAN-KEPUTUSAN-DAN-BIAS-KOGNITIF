@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Interaktif: Psikologi Pengambilan Keputusan & Bias Kognitif</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#060c1a',
+                            900: '#0b1528',
+                            800: '#132342',
+                            700: '#1d3461',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#d97706',
+                            600: '#b45309',
+                            light: '#fef3c7',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b1528;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px) scale(0.99);
+            transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.45s;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            z-index: 10;
+        }
+
+        /* Custom scrollbar for smaller viewports */
+        .slide::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .slide::-webkit-scrollbar-thumb {
+            background: rgba(217, 119, 6, 0.4);
+            border-radius: 9999px;
+        }
+
+        .drawer-backdrop {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .drawer-panel {
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    </style>
+</head>
+
+<body class="text-slate-800 antialiased h-screen w-screen flex flex-col">
+
+    <!-- Top Progress Bar -->
+    <div class="fixed top-0 left-0 right-0 h-1.5 bg-navy-900 z-50">
+        <div id="progressBar" class="h-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-300"
+            style="width: 8.33%;"></div>
+    </div>
+
+    <!-- Main Presentation Stage -->
+    <main id="presentationStage" class="relative flex-1 w-full h-full overflow-hidden">
+
+        <!-- SLIDE 1: COVER -->
+        <section
+            class="slide active bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white flex flex-col justify-between p-6 sm:p-12 lg:p-16"
+            data-title="Cover & Identitas">
+            <!-- Top Header -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-5">
+                <div class="flex items-center gap-3.5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-navy-950 font-display font-extrabold text-xl shadow-lg shadow-amber-500/20">
+                        UMC
+                    </div>
+                    <div>
+                        <p class="text-xs sm:text-sm font-semibold tracking-widest uppercase text-amber-400">Universitas
+                            Muhammadiyah Cirebon</p>
+                        <p class="text-xs sm:text-sm text-slate-300">Program Studi Manajemen • Fakultas Ekonomi dan
+                            Bisnis (2026)</p>
+                    </div>
+                </div>
+                <span
+                    class="px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-medium text-amber-300">
+                    Mata Kuliah: Pengambilan Keputusan Manajerial
+                </span>
+            </div>
+
+            <!-- Center Title -->
+            <div class="my-auto py-8 max-w-4xl">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-semibold uppercase tracking-wider mb-5">
+                    <i class="fa-solid fa-brain"></i> Makalah Akademik & Analisis Manajerial
+                </div>
+                <h1
+                    class="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-white mb-5">
+                    Psikologi Pengambilan Keputusan <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">& Bias
+                        Kognitif</span>
+                </h1>
+                <p class="text-base sm:text-xl text-slate-300 leading-relaxed max-w-3xl">
+                    Menelaah jebakan berpikir sistematis (<i>Anchoring, Confirmation, Availability, & Sunk-Cost
+                        Fallacy</i>) serta strategi mitigasinya dalam analisis bisnis.
+                </p>
+            </div>
+
+            <!-- Bottom Credits -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 pt-6 border-t border-white/10 items-end">
+                <div class="md:col-span-5 bg-white/5 border border-white/10 rounded-2xl p-4">
+                    <p class="text-xs uppercase tracking-wider text-amber-400 font-semibold mb-1">Dosen Pengampu</p>
+                    <p class="font-display font-bold text-base sm:text-lg text-white">Assoc. Prof. Dr. H. Pebi
+                        Kurniawan, M.M.</p>
+                </div>
+                <div class="md:col-span-7 bg-white/5 border border-white/10 rounded-2xl p-4">
+                    <p class="text-xs uppercase tracking-wider text-amber-400 font-semibold mb-2">Disusun Oleh —
+                        Kelompok 5 MJ23B SDM</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+                        <div class="bg-navy-950/60 px-3 py-2 rounded-xl border border-white/5">
+                            <p class="font-semibold text-white">Adnin Nur Salam</p>
+                            <p class="text-xs text-slate-400">NIM: 230111076</p>
+                        </div>
+                        <div class="bg-navy-950/60 px-3 py-2 rounded-xl border border-white/5">
+                            <p class="font-semibold text-white">Muhamad Sapta N. F.</p>
+                            <p class="text-xs text-slate-400">NIM: 230111029</p>
+                        </div>
+                        <div class="bg-navy-950/60 px-3 py-2 rounded-xl border border-white/5">
+                            <p class="font-semibold text-white">Nazarrudin Alif</p>
+                            <p class="text-xs text-slate-400">NIM: 230111130</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: LATAR BELAKANG & RUMUSAN MASALAH -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Latar Belakang & Rumusan Masalah">
+            <div>
+                <div class="flex items-center gap-2 text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">
+                    <span>Bab I • Pendahuluan</span>
+                </div>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Latar Belakang & Rumusan
+                    Masalah</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-4">
+                <!-- Latar Belakang Cards -->
+                <div class="lg:col-span-7 flex flex-col gap-4">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex gap-4 items-start">
+                        <div
+                            class="w-11 h-11 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-navy-900 mb-1">Mitos Rasionalitas Klasik</h3>
+                            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                                Teori klasik mengasumsikan manajer menimbang semua opsi secara objektif. Faktanya,
+                                waktu, informasi, dan kapasitas kognitif sangat terbatas sehingga manajer memakai jalan
+                                pintas (<i>heuristik</i>).
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex gap-4 items-start">
+                        <div
+                            class="w-11 h-11 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-navy-900 mb-1">Profesional Tidak Kebal Bias
+                                (Berthet, 2022)</h3>
+                            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                                Studi lintas empat profesi (manajemen, keuangan, kedokteran, hukum) membuktikan
+                                pengalaman tidak otomatis membebaskan profesional dari <i>framing, overconfidence,</i>
+                                dan <i>anchoring</i>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex gap-4 items-start">
+                        <div
+                            class="w-11 h-11 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center shrink-0 text-lg">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-navy-900 mb-1">Urgensi Intervensi (Fasolo et
+                                al., 2024)</h3>
+                            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                                Dampak buruk bias pada kinerja organisasi sudah mapan, namun perhatian pada strategi
+                                mitigasinya dalam analisis bisnis masih perlu diperkuat.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rumusan Masalah Panel -->
+                <div
+                    class="lg:col-span-5 bg-navy-900 text-white rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <div
+                            class="inline-block px-3 py-1 rounded-lg bg-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
+                            Fokus Kajian Makalah
+                        </div>
+                        <h3 class="font-display text-xl sm:text-2xl font-bold mb-5 text-white">3 Rumusan Masalah Utama
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-3.5 items-start">
+                                <span
+                                    class="w-7 h-7 rounded-full bg-amber-500 text-navy-950 font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">1</span>
+                                <p class="text-sm sm:text-base text-slate-200 leading-relaxed">
+                                    Apa pengertian pengambilan keputusan, heuristik, dan bias kognitif, serta bagaimana
+                                    psikologi menjelaskannya?
+                                </p>
+                            </div>
+                            <div class="flex gap-3.5 items-start">
+                                <span
+                                    class="w-7 h-7 rounded-full bg-amber-500 text-navy-950 font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">2</span>
+                                <p class="text-sm sm:text-base text-slate-200 leading-relaxed">
+                                    Bagaimana empat bias utama (<i>anchoring, confirmation, availability, sunk-cost
+                                        fallacy</i>) muncul dalam praktik bisnis?
+                                </p>
+                            </div>
+                            <div class="flex gap-3.5 items-start">
+                                <span
+                                    class="w-7 h-7 rounded-full bg-amber-500 text-navy-950 font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">3</span>
+                                <p class="text-sm sm:text-base text-slate-200 leading-relaxed">
+                                    Bagaimana strategi memitigasi bias (<i>de-biasing techniques</i>) yang efektif
+                                    diterapkan dalam analisis bisnis?
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/10 text-xs text-amber-300/90 flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye"></i> Tujuan: Mengenali jebakan berpikir & menerapkan langkah
+                        perbaikan terstruktur.
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 3: KONSEP DASAR & 4 KARAKTERISTIK BIAS -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Konsep Dasar & Karakteristik Bias">
+            <div>
+                <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Bab II • Pembahasan (2.1)
+                </div>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Konsep Dasar & Karakteristik
+                    Bias Kognitif</h2>
+            </div>
+
+            <div class="my-auto py-4 space-y-6">
+                <!-- 3 Definisi Utama -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="bg-white rounded-2xl p-6 border-t-4 border-navy-800 shadow-sm">
+                        <div class="text-xs font-bold uppercase text-amber-600 mb-1">Definisi 01</div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">Pengambilan Keputusan</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Proses memilih satu alternatif tindakan dari dua atau lebih opsi untuk memecahkan masalah
+                            atau memanfaatkan peluang melalui <i>judgment</i> dan pilihan (Berthet, 2022).
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 border-t-4 border-amber-500 shadow-sm">
+                        <div class="text-xs font-bold uppercase text-amber-600 mb-1">Definisi 02</div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">Heuristik</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Strategi pemrosesan informasi yang disederhanakan—aturan praktis (<i>rule of thumb</i>)
+                            untuk membuat penilaian cepat saat waktu dan data terbatas.
+                        </p>
+                    </div>
+                    <div class="bg-white rounded-2xl p-6 border-t-4 border-navy-800 shadow-sm">
+                        <div class="text-xs font-bold uppercase text-amber-600 mb-1">Definisi 03</div>
+                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">Bias Kognitif</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Kesalahan sistematis yang dapat diprediksi akibat penggunaan heuristik, membuat hasil
+                            keputusan menjadi tidak akurat atau tidak optimal (Korteling et al., 2021).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 4 Karakteristik Bias -->
+                <div class="bg-navy-900 rounded-2xl p-6 text-white">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h3 class="font-display text-lg sm:text-xl font-bold text-amber-400">
+                            <i class="fa-solid fa-fingerprint mr-2"></i>4 Karakteristik Pembeda Bias dari Kesalahan
+                            Biasa
+                        </h3>
+                        <span class="text-xs text-slate-300 bg-white/10 px-3 py-1 rounded-full">Juga merembes ke
+                            pemanfaatan SIM (Adhikari, 2025)</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-navy-800/90 border border-white/10 rounded-xl p-4">
+                            <span class="text-amber-400 font-display font-extrabold text-lg">01. Sistematis</span>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1">Muncul dengan pola konsisten pada banyak
+                                orang dan situasi, bukan kesalahan acak.</p>
+                        </div>
+                        <div class="bg-navy-800/90 border border-white/10 rounded-xl p-4">
+                            <span class="text-amber-400 font-display font-extrabold text-lg">02. Lintas Profesi</span>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1">Terdeteksi pada manajer, investor, dokter,
+                                maupun hakim; bukan sekadar masalah orang awam.</p>
+                        </div>
+                        <div class="bg-navy-800/90 border border-white/10 rounded-xl p-4">
+                            <span class="text-amber-400 font-display font-extrabold text-lg">03. Sulit
+                                Dihilangkan</span>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1">Memiliki asal-usul neural & evolusioner
+                                yang "tertanam" (Korteling et al., 2021).</p>
+                        </div>
+                        <div class="bg-navy-800/90 border border-white/10 rounded-xl p-4">
+                            <span class="text-amber-400 font-display font-extrabold text-lg">04. Bervariasi</span>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-1">Kerentanan berbeda antarindividu; tidak
+                                semua profesional rentan pada tingkat yang sama.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 4: PSIKOLOGI PENGAMBILAN KEPUTUSAN & PERSEPSI RISIKO -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Psikologi Keputusan & Persepsi Risiko">
+            <div>
+                <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Bab II • Pembahasan (2.2)
+                </div>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Psikologi Pengambilan
+                    Keputusan & Mediasi Risiko</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 my-auto py-4">
+                <!-- Left: Kahneman & Tversky -->
+                <div
+                    class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-navy-900 mb-3">Program <i>Heuristics and
+                                Biases</i></h3>
+                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
+                            Dirintis oleh <b>Kahneman dan Tversky (1970-an)</b> untuk menjawab bagaimana manusia
+                            sebenarnya memproses informasi ketika memilih, bukan sekadar bagaimana seharusnya memilih
+                            secara normatif.
+                        </p>
+                        <div class="bg-slate-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
+                            <p class="text-sm font-medium text-navy-900">
+                                "Pikiran manusia efisien tetapi tidak sempurna. Heuristik mempercepat keputusan di
+                                tengah keterbatasan data, namun memunculkan risiko kesalahan berpola."
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-5 pt-4 border-t border-slate-100">
+                        <b>Catatan Kritis (Berthet, 2022):</b> Bias harus dipahami sebagai kecenderungan umum yang perlu
+                        diwaspadai, bukan vonis bahwa manusia selalu tidak rasional.
+                    </p>
+                </div>
+
+                <!-- Right: Risk Perception Mediation -->
+                <div class="bg-navy-900 text-white rounded-2xl p-6 sm:p-8 shadow-lg flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="w-12 h-12 rounded-2xl bg-white/10 text-amber-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-diagram-project"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-white mb-3">Peran Mediasi Persepsi Risiko</h3>
+                        <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6">
+                            Bias kognitif tidak bekerja sendirian. Riset keuangan oleh <b>Ahmed et al. (2022)</b> serta
+                            <b>Jain et al. (2023)</b> membuktikan bahwa cara seseorang menilai risiko menjadi jembatan
+                            (mediator parsial) menuju keputusan akhir.
+                        </p>
+
+                        <!-- Visual Flow Diagram -->
+                        <div class="bg-navy-950/80 border border-white/10 rounded-2xl p-5">
+                            <p class="text-xs uppercase tracking-wider text-amber-400 font-bold mb-3 text-center">
+                                Mekanisme Pengaruh dalam Keputusan Investasi</p>
+                            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-center">
+                                <div class="bg-navy-800 border border-amber-400/30 rounded-xl p-3 flex-1 w-full">
+                                    <p class="text-xs text-amber-300 font-semibold">Bias Perilaku</p>
+                                    <p class="text-sm font-bold text-white mt-0.5">Overconfidence & Availability</p>
+                                </div>
+                                <i class="fa-solid fa-arrow-right text-amber-400 rotate-90 sm:rotate-0"></i>
+                                <div class="bg-amber-500 text-navy-950 rounded-xl p-3 flex-1 w-full shadow-md">
+                                    <p class="text-xs font-bold uppercase">Mediator Parsial</p>
+                                    <p class="text-sm font-extrabold mt-0.5">Persepsi Risiko</p>
+                                </div>
+                                <i class="fa-solid fa-arrow-right text-amber-400 rotate-90 sm:rotate-0"></i>
+                                <div class="bg-navy-800 border border-white/20 rounded-xl p-3 flex-1 w-full">
+                                    <p class="text-xs text-slate-300 font-semibold">Output</p>
+                                    <p class="text-sm font-bold text-white mt-0.5">Keputusan Akhir</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-5 pt-4 border-t border-white/10">
+                        Implikasi Manajerial: Mengelola bias juga berarti menata cara tim mengukur dan memersepsikan
+                        risiko.
+                    </p>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 5: BIAS 1 - ANCHORING -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Bias 1: Anchoring">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Identifikasi Bias Umum
+                        • 01 dari 04</div>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Anchoring (Efek
+                        Penjangkaran)</h2>
+                </div>
+                <span class="px-4 py-1.5 rounded-full bg-navy-900 text-amber-400 font-display font-bold text-sm">
+                    <i class="fa-solid fa-anchor mr-1.5"></i> Jebakan Angka Awal
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-4">
+                <!-- Konsep & Bukti Empiris -->
+                <div class="lg:col-span-5 flex flex-col gap-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                        <h3 class="font-display font-bold text-lg text-navy-900 mb-2">Apa itu Anchoring?</h3>
+                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                            Kecenderungan menyesuaikan penilaian—terutama penilaian numerik—ke arah informasi pertama
+                            yang diterima. Angka awal bertindak sebagai <b>"jangkar"</b> sehingga estimasi akhir tetap
+                            berada di dekatnya, meskipun angka awal tersebut tidak relevan.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-md flex-1">
+                        <div
+                            class="flex items-center gap-2 text-amber-400 font-bold text-xs uppercase tracking-wider mb-2">
+                            <i class="fa-solid fa-chart-bar"></i> Bukti Empiris Kuat
+                        </div>
+                        <h4 class="font-display font-bold text-lg mb-2">Meta-Analisis Bystranowski et al. (2021)</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-3">
+                            Menelaah <b>29 studi (93 ukuran efek, N = 8.549)</b> dan menemukan bahwa angka yang menonjol
+                            memengaruhi putusan secara signifikan.
+                        </p>
+                        <div class="bg-white/10 rounded-xl p-3 text-xs text-amber-200">
+                            <b>Temuan Unik:</b> Batas atas (<i>caps</i>) ganti rugi justru dapat berfungsi sebagai
+                            jangkar yang <i>mengangkat</i> nilai putusan, bukan menurunkannya.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3 Contoh Praktik Bisnis -->
+                <div
+                    class="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 flex flex-col justify-center">
+                    <h3 class="font-display text-xl font-bold text-navy-900 mb-5 flex items-center gap-2">
+                        <span
+                            class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-sm"><i
+                                class="fa-solid fa-briefcase"></i></span>
+                        Manifestasi Anchoring dalam Praktik Bisnis
+                    </h3>
+                    <div class="space-y-4">
+                        <div
+                            class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-amber-400 transition-colors">
+                            <div class="flex items-center gap-2.5 font-display font-bold text-navy-900 mb-1">
+                                <span class="px-2 py-0.5 rounded bg-navy-900 text-amber-400 text-xs">Kasus 1</span>
+                                Penyusunan Anggaran Tahunan (Incremental Budgeting)
+                            </div>
+                            <p class="text-sm text-slate-600">Anggaran tahun depan hanya menaikkan atau menurunkan
+                                sedikit angka realisasi tahun lalu tanpa mengevaluasi ulang kebutuhan riil dari nol.</p>
+                        </div>
+
+                        <div
+                            class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-amber-400 transition-colors">
+                            <div class="flex items-center gap-2.5 font-display font-bold text-navy-900 mb-1">
+                                <span class="px-2 py-0.5 rounded bg-navy-900 text-amber-400 text-xs">Kasus 2</span>
+                                Negosiasi Harga dengan Pemasok
+                            </div>
+                            <p class="text-sm text-slate-600">Penawaran harga pertama yang dilontarkan pemasok menjadi
+                                titik acuan psikologis bagi seluruh proses tawar-menawar berikutnya.</p>
+                        </div>
+
+                        <div
+                            class="p-4 rounded-xl bg-slate-50 border border-slate-200/80 hover:border-amber-400 transition-colors">
+                            <div class="flex items-center gap-2.5 font-display font-bold text-navy-900 mb-1">
+                                <span class="px-2 py-0.5 rounded bg-navy-900 text-amber-400 text-xs">Kasus 3</span>
+                                Valuasi Merger & Akuisisi
+                            </div>
+                            <p class="text-sm text-slate-600">Penilaian nilai wajar perusahaan target akuisisi sering
+                                kali terseret oleh harga permintaan awal (<i>asking price</i>) penjual.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 6: BIAS 2 - CONFIRMATION BIAS -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Bias 2: Confirmation Bias">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Identifikasi Bias Umum
+                        • 02 dari 04</div>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Confirmation Bias (Bias
+                        Konfirmasi)</h2>
+                </div>
+                <span class="px-4 py-1.5 rounded-full bg-navy-900 text-amber-400 font-display font-bold text-sm">
+                    <i class="fa-solid fa-magnifying-glass-chart mr-1.5"></i> Pembenaran Keyakinan Awal
+                </span>
+            </div>
+
+            <div class="my-auto py-4 space-y-6">
+                <!-- 3 Stages Banner -->
+                <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-md">
+                    <p class="text-sm sm:text-base text-slate-200 mb-4">
+                        <b>Definisi:</b> Kecenderungan mencari, menafsirkan, mendukung, dan mengingat informasi yang
+                        menguatkan keyakinan yang sudah dimiliki (Berthet, 2022). Akibatnya, analisis tampak ilmiah
+                        padahal kesimpulannya sudah ditentukan di awal.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white/10 border border-white/10 rounded-xl p-4 flex items-center gap-3">
+                            <span
+                                class="w-8 h-8 rounded-full bg-amber-400 text-navy-950 font-extrabold flex items-center justify-center shrink-0">1</span>
+                            <div>
+                                <p class="font-bold text-amber-300 text-sm">Pencarian Berat Sebelah</p>
+                                <p class="text-xs text-slate-300">Hanya mencari bukti yang sejalan dengan hipotesis
+                                    awal.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 border border-white/10 rounded-xl p-4 flex items-center gap-3">
+                            <span
+                                class="w-8 h-8 rounded-full bg-amber-400 text-navy-950 font-extrabold flex items-center justify-center shrink-0">2</span>
+                            <div>
+                                <p class="font-bold text-amber-300 text-sm">Penafsiran Selektif</p>
+                                <p class="text-xs text-slate-300">Mendiskreditkan data kontra sebagai anomali atau salah
+                                    sampel.</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 border border-white/10 rounded-xl p-4 flex items-center gap-3">
+                            <span
+                                class="w-8 h-8 rounded-full bg-amber-400 text-navy-950 font-extrabold flex items-center justify-center shrink-0">3</span>
+                            <div>
+                                <p class="font-bold text-amber-300 text-sm">Pengingatan Selektif</p>
+                                <p class="text-xs text-slate-300">Lebih mudah mengingat fakta yang membenarkan
+                                    keputusan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 Contoh Praktik -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-navy-900 mb-1.5">Riset Pemasaran</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">Tim yang yakin produk akan laku hanya menonjolkan
+                            hasil survei positif dan menganggap respons negatif sebagai "sampel kurang tepat".</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-navy-900 mb-1.5">Rekrutmen SDM</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">Manajer SDM yang terlanjur menyukai kandidat
+                            tertentu hanya mengajukan pertanyaan mudah agar kandidat tampak unggul.</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-navy-900 mb-1.5">Rekomendasi Investasi</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">Analis memilih rasio keuangan tertentu yang
+                            mendukung rekomendasi beli/jual yang sudah ia putuskan sebelumnya.</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-desktop"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-navy-900 mb-1.5">Dashboard SIM Bank</h4>
+                        <p class="text-xs sm:text-sm text-slate-600">Data lengkap pada sistem informasi tidak otomatis
+                            memperbaiki keputusan bila staf hanya memilih angka yang sesuai keyakinannya (Adhikari,
+                            2025).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 7: BIAS 3 - AVAILABILITY BIAS -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Bias 3: Availability Bias">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Identifikasi Bias Umum
+                        • 03 dari 04</div>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Availability Bias (Bias
+                        Ketersediaan)</h2>
+                </div>
+                <span class="px-4 py-1.5 rounded-full bg-navy-900 text-amber-400 font-display font-bold text-sm">
+                    <i class="fa-solid fa-bolt mr-1.5"></i> Ilusi Kemudahan Mengingat
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-4">
+                <div
+                    class="lg:col-span-5 bg-navy-900 text-white rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-lg">
+                    <div>
+                        <h3 class="font-display text-xl font-bold text-amber-400 mb-3">Mekanisme Kognitif</h3>
+                        <p class="text-sm sm:text-base text-slate-200 leading-relaxed mb-5">
+                            Kecenderungan menilai probabilitas suatu peristiwa berdasarkan seberapa mudah contoh
+                            peristiwa tersebut muncul di ingatan (Berthet, 2022).
+                        </p>
+                        <div class="space-y-3">
+                            <div class="bg-white/10 p-3.5 rounded-xl border border-white/10">
+                                <p class="text-xs font-bold text-amber-300 uppercase">Pemicu Utama</p>
+                                <p class="text-sm text-white mt-0.5">Peristiwa yang <b>baru saja terjadi (recency)</b>,
+                                    bersifat <b>dramatis</b>, atau <b>ramai diberitakan media</b> terasa jauh lebih
+                                    sering terjadi daripada statistik sebenarnya.</p>
+                            </div>
+                            <div class="bg-white/10 p-3.5 rounded-xl border border-white/10">
+                                <p class="text-xs font-bold text-amber-300 uppercase">Konteks Investasi</p>
+                                <p class="text-sm text-slate-200 mt-0.5">Jain et al. (2023) & Oktaviani & Mawaddah
+                                    (2023) menunjukkan availability bias memengaruhi persepsi risiko investor muda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 flex flex-col gap-4 justify-center">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-amber-500">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-display font-bold text-lg text-navy-900">1. Alokasi Anggaran Reaktif
+                                (Keamanan Siber)</h4>
+                            <i class="fa-solid fa-shield-virus text-amber-500 text-lg"></i>
+                        </div>
+                        <p class="text-sm text-slate-600">Setelah berita luas tentang serangan siber pada perusahaan
+                            lain, manajemen langsung memindahkan mayoritas anggaran ke keamanan siber dan mengabaikan
+                            risiko operasional lain yang secara statistik lebih sering terjadi.</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-navy-800">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-display font-bold text-lg text-navy-900">2. Penilaian Risiko Saham Jangka
+                                Pendek</h4>
+                            <i class="fa-solid fa-arrow-trend-up text-navy-800 text-lg"></i>
+                        </div>
+                        <p class="text-sm text-slate-600">Investor menilai suatu saham berisiko rendah hanya karena
+                            harganya naik dalam beberapa pekan terakhir, padahal data historis jangka panjang
+                            menunjukkan volatilitas tinggi.</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border-l-4 border-amber-500">
+                        <div class="flex items-center justify-between mb-1">
+                            <h4 class="font-display font-bold text-lg text-navy-900">3. Bias Resensi dalam Penilaian
+                                Kinerja SDM</h4>
+                            <i class="fa-solid fa-clipboard-user text-amber-500 text-lg"></i>
+                        </div>
+                        <p class="text-sm text-slate-600">Evaluasi kinerja tahunan karyawan didominasi oleh kejadian
+                            atau pencapaian beberapa minggu terakhir sebelum penilaian, bukan keseluruhan periode kerja
+                            12 bulan.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 8: BIAS 4 - SUNK-COST FALLACY -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Bias 4: Sunk-Cost Fallacy">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Identifikasi Bias Umum
+                        • 04 dari 04</div>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Sunk-Cost Fallacy
+                        (Kekeliruan Biaya Tenggelam)</h2>
+                </div>
+                <span class="px-4 py-1.5 rounded-full bg-navy-900 text-amber-400 font-display font-bold text-sm">
+                    <i class="fa-solid fa-water mr-1.5"></i> Terjebak Masa Lalu
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-4">
+                <!-- Definisi & Nuansa Knox -->
+                <div class="lg:col-span-6 flex flex-col gap-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                        <h3 class="font-display font-bold text-lg text-navy-900 mb-2">Esensi Sunk-Cost Fallacy</h3>
+                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
+                            <b>Biaya tenggelam (<i>sunk cost</i>)</b> adalah biaya yang sudah dikeluarkan dan tidak
+                            dapat dipulihkan. Kekeliruan terjadi ketika keputusan ke depan dipengaruhi biaya masa lalu
+                            tersebut—terus melanjutkan proyek gagal karena merasa <i>"sudah terlanjur menginvestasikan
+                                banyak"</i>.
+                        </p>
+                    </div>
+
+                    <div
+                        class="bg-gradient-to-br from-navy-900 to-navy-800 text-white rounded-2xl p-6 shadow-md border border-amber-400/30 flex-1">
+                        <div
+                            class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs font-bold uppercase mb-2">
+                            <i class="fa-solid fa-scale-unbalanced"></i> Nuansa Akademik: Knox (2022)
+                        </div>
+                        <h4 class="font-display font-bold text-lg text-white mb-2">Quasi-Hyperbolic Discounting</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Meskipun akuntansi manajerial melarang mempertimbangkan <i>sunk cost</i>, Knox (2022)
+                            menunjukkan bahwa pada kondisi tertentu, mengingat biaya masa lalu dapat membantu
+                            mempertahankan komitmen pada proyek yang <b>pada dasarnya menguntungkan</b>.
+                        </p>
+                        <p class="text-xs text-amber-300 mt-3 font-medium">
+                            Pelajaran Analis: Bedakan antara keputusan karena <u>rasa enggan merugi (emosional)</u> vs
+                            keputusan yang memiliki <u>dasar ekonomi ke depan yang kuat</u>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contoh Bisnis -->
+                <div
+                    class="lg:col-span-6 bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 flex flex-col justify-center">
+                    <h3 class="font-display text-xl font-bold text-navy-900 mb-4">Contoh Kasus di Dunia Usaha</h3>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start p-4 rounded-xl bg-amber-50/60 border border-amber-200/70">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-server"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-navy-900">Proyek Sistem ERP yang Molor</h4>
+                                <p class="text-sm text-slate-600 mt-1">Perusahaan terus menambah anggaran pada
+                                    implementasi ERP yang terlambat dan membengkak karena sudah keluar dana miliaran,
+                                    meski analisis manfaat-biaya ke depan tidak layak.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-industry"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-navy-900">Mempertahankan Lini Produk Merugi</h4>
+                                <p class="text-sm text-slate-600 mt-1">Manajer menolak menghentikan produksi barang yang
+                                    terus merugi semata-mata karena investasi pembelian mesin pabriknya sudah sangat
+                                    besar.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start p-4 rounded-xl bg-slate-50 border border-slate-200">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-navy-900 text-amber-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-store-slash"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-bold text-navy-900">Bertahan di Pasar Baru yang Gagal</h4>
+                                <p class="text-sm text-slate-600 mt-1">Ekspansi cabang atau pasar baru yang tidak
+                                    menjanjikan tetap dipertahankan karena pimpinan enggan mengakui kegagalan keputusan
+                                    awal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 9: STRATEGI MITIGASI UMUM -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Strategi Mitigasi Umum">
+            <div>
+                <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Bab II • Pembahasan (2.4.1
+                    & 2.4.2)</div>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Dua Pendekatan Mitigasi &
+                    Decision Hygiene</h2>
+            </div>
+
+            <div class="my-auto py-4 space-y-6">
+                <!-- Fasolo et al. 2024 Dual Approach -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border-t-4 border-amber-500">
+                        <div class="flex items-center justify-between mb-3">
+                            <span
+                                class="px-3 py-1 rounded-full bg-amber-100 text-amber-700 font-bold text-xs uppercase">Pendekatan
+                                1 • Fasolo et al. (2024)</span>
+                            <i class="fa-solid fa-head-side-virus text-amber-500 text-xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-navy-900 mb-2">Debiasing (Fokus Individu)</h3>
+                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-3">
+                            Membekali pengambil keputusan dengan kesadaran akan bias, pelatihan, atau perangkat kognitif
+                            untuk mengenali dan melawan bias dalam pikirannya sendiri.
+                        </p>
+                        <div class="bg-slate-50 p-3 rounded-xl text-xs text-slate-600 border border-slate-200">
+                            <b>Temuan Korteling et al. (2021):</b> Pelatihan berbasis <b>gim</b> lebih efektif dan
+                            bertahan lama dibanding video pasif.
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border-t-4 border-navy-900">
+                        <div class="flex items-center justify-between mb-3">
+                            <span
+                                class="px-3 py-1 rounded-full bg-navy-900 text-amber-400 font-bold text-xs uppercase">Pendekatan
+                                2 • Fasolo et al. (2024)</span>
+                            <i class="fa-solid fa-sitemap text-navy-900 text-xl"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold text-navy-900 mb-2">Choice Architecture (Fokus
+                            Lingkungan)</h3>
+                        <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-3">
+                            Mengubah lingkungan, prosedur, atau struktur pengambilan keputusan organisasi agar ruang
+                            bagi bias untuk muncul menjadi jauh lebih kecil.
+                        </p>
+                        <div class="bg-slate-50 p-3 rounded-xl text-xs text-slate-600 border border-slate-200">
+                            <b>Rekomendasi Praktis:</b> Menggabungkan keduanya (<i>pendekatan ganda</i>) memberikan
+                            perlindungan paling optimal.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Hygiene Kahneman et al. 2021 -->
+                <div class="bg-navy-900 text-white rounded-2xl p-6 shadow-lg">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <h3 class="font-display text-xl font-bold text-amber-400">
+                            <i class="fa-solid fa-sparkles mr-2"></i>Teknik Umum Organisasi: <i>Decision Hygiene</i>
+                            (Kahneman et al., 2021)
+                        </h3>
+                        <span class="text-xs text-slate-300">Sekaligus mengurangi <i>noise</i> (variabilitas penilaian
+                            yang tidak diinginkan)</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-white/10 rounded-xl p-4">
+                            <p class="font-bold text-amber-300 text-sm mb-1">1. Dekomposisi Penilaian</p>
+                            <p class="text-xs text-slate-300">Memecah keputusan kompleks menjadi beberapa dimensi
+                                objektif yang dinilai secara terpisah.</p>
+                        </div>
+                        <div class="bg-white/10 rounded-xl p-4">
+                            <p class="font-bold text-amber-300 text-sm mb-1">2. Penilaian Independen</p>
+                            <p class="text-xs text-slate-300">Meminta skor/pendapat tertulis dari tiap anggota tim
+                                sebelum diskusi kelompok dimulai.</p>
+                        </div>
+                        <div class="bg-white/10 rounded-xl p-4">
+                            <p class="font-bold text-amber-300 text-sm mb-1">3. Checklist & Templat Baku</p>
+                            <p class="text-xs text-slate-300">Menggunakan daftar periksa standar agar tidak ada variabel
+                                penting yang terlewat.</p>
+                        </div>
+                        <div class="bg-white/10 rounded-xl p-4">
+                            <p class="font-bold text-amber-300 text-sm mb-1">4. Wajib Alternatif & Asumsi</p>
+                            <p class="text-xs text-slate-300">Mewajibkan proposal mencantumkan opsi tandingan dan asumsi
+                                dasar secara eksplisit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 10: MITIGASI SPESIFIK PER BIAS (INTERACTIVE TABS) -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Mitigasi Spesifik per Bias (Interaktif)">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                    <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Bab II • Pembahasan
+                        (2.4.3)</div>
+                    <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Mitigasi Spesifik untuk
+                        Setiap Bias</h2>
+                </div>
+                <span
+                    class="text-xs font-medium text-slate-500 bg-white px-3 py-1.5 rounded-full border border-slate-200">
+                    <i class="fa-solid fa-hand-pointer text-amber-500 mr-1"></i> Klik tab untuk mengeksplorasi teknik
+                </span>
+            </div>
+
+            <div class="my-auto py-4 flex flex-col gap-5">
+                <!-- Interactive Tab Buttons -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" role="tablist">
+                    <button onclick="selectMitigationTab(0)" id="mTab0"
+                        class="mitigation-tab active-tab bg-navy-900 text-white border-2 border-amber-400 rounded-xl p-3.5 text-left transition-all shadow-md">
+                        <div class="text-xs text-amber-400 font-bold uppercase">Bias 01</div>
+                        <div class="font-display font-bold text-base sm:text-lg">Anchoring</div>
+                    </button>
+                    <button onclick="selectMitigationTab(1)" id="mTab1"
+                        class="mitigation-tab bg-white text-navy-900 border-2 border-slate-200 hover:border-amber-400 rounded-xl p-3.5 text-left transition-all">
+                        <div class="text-xs text-slate-400 font-bold uppercase">Bias 02</div>
+                        <div class="font-display font-bold text-base sm:text-lg">Confirmation</div>
+                    </button>
+                    <button onclick="selectMitigationTab(2)" id="mTab2"
+                        class="mitigation-tab bg-white text-navy-900 border-2 border-slate-200 hover:border-amber-400 rounded-xl p-3.5 text-left transition-all">
+                        <div class="text-xs text-slate-400 font-bold uppercase">Bias 03</div>
+                        <div class="font-display font-bold text-base sm:text-lg">Availability</div>
+                    </button>
+                    <button onclick="selectMitigationTab(3)" id="mTab3"
+                        class="mitigation-tab bg-white text-navy-900 border-2 border-slate-200 hover:border-amber-400 rounded-xl p-3.5 text-left transition-all">
+                        <div class="text-xs text-slate-400 font-bold uppercase">Bias 04</div>
+                        <div class="font-display font-bold text-base sm:text-lg">Sunk-Cost</div>
+                    </button>
+                </div>
+
+                <!-- Tab Content Container -->
+                <div
+                    class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 min-h-[290px] flex flex-col justify-center">
+                    <!-- Panel 0: Anchoring -->
+                    <div id="mPanel0" class="mitigation-panel">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-anchor"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display text-xl sm:text-2xl font-bold text-navy-900">Strategi Mengatasi
+                                    Anchoring</h3>
+                                <p class="text-xs sm:text-sm text-slate-500">Melepaskan ketergantungan pada angka
+                                    referensi pertama</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-calculator text-amber-500 mr-2"></i>Zero-Based Budgeting</p>
+                                <p class="text-sm text-slate-600">Membuat estimasi sendiri dari nol secara independen
+                                    sebelum melihat angka anggaran tahun lalu atau angka dari pihak lain.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-layer-group text-amber-500 mr-2"></i>Multi-Acuan Pembanding
+                                </p>
+                                <p class="text-sm text-slate-600">Menggunakan kombinasi data pasar, tolok ukur pesaing,
+                                    dan data historis agar penilaian tidak bertumpu pada satu angka.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-handshake text-amber-500 mr-2"></i>Persiapan BATNA Negosiasi
+                                </p>
+                                <p class="text-sm text-slate-600">Menetapkan batas reservasi dan alternatif terbaik
+                                    (BATNA) secara tertulis sebelum pertemuan negosiasi dimulai.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-triangle-exclamation text-amber-600 mr-2"></i>Waspada
+                                    Pembatasan Formal</p>
+                                <p class="text-sm text-slate-700">Aturan batas angka formal dapat berubah menjadi
+                                    jangkar baru (Bystranowski et al., 2021), sehingga desain aturan angka harus
+                                    hati-hati.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 1: Confirmation -->
+                    <div id="mPanel1" class="mitigation-panel hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display text-xl sm:text-2xl font-bold text-navy-900">Strategi Mengatasi
+                                    Confirmation Bias</h3>
+                                <p class="text-xs sm:text-sm text-slate-500">Mewajibkan pengujian bukti yang
+                                    bertentangan dengan keyakinan awal</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-arrows-rotate text-amber-500 mr-2"></i>Prinsip <i>Consider
+                                        the Opposite</i></p>
+                                <p class="text-sm text-slate-600">Mewajibkan analis menuliskan minimal <b>3 alasan
+                                        kuat</b> mengapa rekomendasi yang diinginkan bisa salah.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-users-gear text-amber-500 mr-2"></i>Devil’s Advocate & Red
+                                    Team</p>
+                                <p class="text-sm text-slate-600">Menunjuk individu atau tim khusus yang secara resmi
+                                    bertugas mengkritik dan membantah proposal utama.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-list-check text-amber-500 mr-2"></i>Kriteria Evaluasi di Awal
+                                </p>
+                                <p class="text-sm text-slate-600">Menetapkan standar keberhasilan dan metrik evaluasi
+                                    sebelum data hasil survei atau analisis dibuka.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-columns text-amber-500 mr-2"></i>Desain Dashboard Berimbang
+                                </p>
+                                <p class="text-sm text-slate-600">Merancang laporan SIM agar menampilkan data pendukung
+                                    dan data penentang secara berdampingan (Adhikari, 2025).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Availability -->
+                    <div id="mPanel2" class="mitigation-panel hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display text-xl sm:text-2xl font-bold text-navy-900">Strategi Mengatasi
+                                    Availability Bias</h3>
+                                <p class="text-xs sm:text-sm text-slate-500">Mengganti kesan anekdotal dengan frekuensi
+                                    statistik jangka panjang</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-chart-line text-amber-500 mr-2"></i>Gunakan Laju Dasar
+                                    (<i>Base Rate</i>)</p>
+                                <p class="text-sm text-slate-600">Mengacu pada data historis jangka panjang mengenai
+                                    frekuensi kejadian sebenarnya, alih-alih kejadian dramatis terbaru.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-percent text-amber-500 mr-2"></i>Statistik Kuantitatif</p>
+                                <p class="text-sm text-slate-600">Menyajikan profil risiko dalam bentuk angka
+                                    probabilitas objektif, bukan narasi cerita atau potongan berita sensasional.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-table-cells text-amber-500 mr-2"></i>Matriks Risiko Lintas
+                                    Fungsi</p>
+                                <p class="text-sm text-slate-600">Menyusun matriks probabilitas & dampak bersama
+                                    berbagai divisi agar penilaian tidak didominasi satu sudut pandang.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Sunk-Cost -->
+                    <div id="mPanel3" class="mitigation-panel hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div
+                                class="w-11 h-11 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-water"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display text-xl sm:text-2xl font-bold text-navy-900">Strategi Mengatasi
+                                    Sunk-Cost Fallacy</h3>
+                                <p class="text-xs sm:text-sm text-slate-500">Memisahkan komitmen emosional masa lalu
+                                    dari nilai ekonomi masa depan</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-forward text-amber-500 mr-2"></i>Evaluasi
+                                    <i>Forward-Looking</i>
+                                </p>
+                                <p class="text-sm text-slate-600">Hanya menghitung biaya tambahan (<i>incremental
+                                        cost</i>) dan manfaat masa depan sejak titik keputusan saat ini.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-flag-checkered text-amber-500 mr-2"></i>Kill Criteria &
+                                    Stage-Gate</p>
+                                <p class="text-sm text-slate-600">Menetapkan syarat penghentian proyek dan gerbang
+                                    evaluasi berkala di awal sebelum keterikatan emosional terbentuk.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-user-shield text-amber-500 mr-2"></i>Pemisahan Peninjau
+                                    Proyek</p>
+                                <p class="text-sm text-slate-600">Memisahkan pihak yang menyetujui proyek awal dari
+                                    pihak independen yang mengevaluasi kelanjutan proyek.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <p class="font-bold text-navy-900 mb-1"><i
+                                        class="fa-solid fa-skull-crossbones text-amber-500 mr-2"></i>Praktik
+                                    <i>Pre-Mortem</i>
+                                </p>
+                                <p class="text-sm text-slate-600">Membayangkan di awal bahwa proyek telah gagal total,
+                                    lalu menelusuri potensi penyebabnya sejak dini.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 11: TABEL RANGKUMAN & KETERBATASAN MITIGASI -->
+        <section class="slide bg-slate-50 text-slate-800 flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Rangkuman Matriks & Keterbatasan">
+            <div>
+                <div class="text-amber-600 font-bold text-xs uppercase tracking-widest mb-1">Bab II • Pembahasan (2.4.4
+                    & 2.5)</div>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-navy-900">Matriks Rangkuman &
+                    Keterbatasan Mitigasi</h2>
+            </div>
+
+            <div class="my-auto py-3 space-y-5">
+                <!-- Summary Table -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[680px]">
+                        <thead>
+                            <tr class="bg-navy-900 text-white text-xs sm:text-sm uppercase tracking-wider">
+                                <th class="py-3.5 px-4 font-display">Jenis Bias</th>
+                                <th class="py-3.5 px-4 font-display">Inti Masalah</th>
+                                <th class="py-3.5 px-4 font-display">Contoh Bisnis</th>
+                                <th class="py-3.5 px-4 font-display text-amber-400">Strategi Mitigasi Utama</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-bold text-navy-900">Anchoring</td>
+                                <td class="py-3.5 px-4 text-slate-600">Penilaian terpaku pada angka pertama</td>
+                                <td class="py-3.5 px-4 text-slate-600">Anggaran berbasis realisasi tahun lalu</td>
+                                <td class="py-3.5 px-4 font-medium text-navy-800">Estimasi independen (ZBB),
+                                    multi-pembanding, BATNA</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-bold text-navy-900">Confirmation Bias</td>
+                                <td class="py-3.5 px-4 text-slate-600">Mencari & menafsirkan data pendukung keyakinan
+                                    awal</td>
+                                <td class="py-3.5 px-4 text-slate-600">Hanya menyajikan hasil survei produk yang positif
+                                </td>
+                                <td class="py-3.5 px-4 font-medium text-navy-800"><i>Consider the opposite</i>, <i>red
+                                        team</i>, kriteria di awal</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-bold text-navy-900">Availability Bias</td>
+                                <td class="py-3.5 px-4 text-slate-600">Menilai peluang dari kemudahan mengingat</td>
+                                <td class="py-3.5 px-4 text-slate-600">Anggaran berlebih pada risiko yang baru
+                                    diberitakan</td>
+                                <td class="py-3.5 px-4 font-medium text-navy-800"><i>Base rate</i>, data jangka panjang,
+                                    matriks risiko</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="py-3.5 px-4 font-bold text-navy-900">Sunk-Cost Fallacy</td>
+                                <td class="py-3.5 px-4 text-slate-600">Keputusan dipengaruhi biaya masa lalu</td>
+                                <td class="py-3.5 px-4 text-slate-600">Terus mendanai proyek ERP yang gagal</td>
+                                <td class="py-3.5 px-4 font-medium text-navy-800">Analisis <i>forward-looking</i>,
+                                    <i>kill criteria</i>, <i>stage-gate</i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Keterbatasan Mitigasi Box -->
+                <div
+                    class="bg-amber-50 border border-amber-300/80 rounded-2xl p-5 flex flex-col md:flex-row gap-4 items-start">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-amber-500 text-navy-950 flex items-center justify-center shrink-0 text-lg font-bold">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-base sm:text-lg text-navy-900 mb-1">Keterbatasan Mitigasi
+                            Bias (Bukan Solusi Ajaib)</h3>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <b>Fasolo et al. (2024)</b> menyoroti minimnya studi perbandingan antarintervensi pada
+                            tingkat kelompok. <b>Korteling et al. (2021)</b> menegaskan transfer efek pelatihan ke
+                            situasi kerja nyata belum banyak terbukti, dan <b>Berthet (2022)</b> mengkritik
+                            ketergantungan pada studi vinyet. Maka, organisasi harus memadukan pelatihan, prosedur baku,
+                            dan evaluasi berkala.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+        <!-- SLIDE 12: SIMPULAN, SARAN & DAFTAR PUSTAKA -->
+        <section
+            class="slide bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white flex flex-col justify-between p-6 sm:p-12 lg:p-14"
+            data-title="Simpulan, Saran & Daftar Pustaka">
+            <div>
+                <div class="text-amber-400 font-bold text-xs uppercase tracking-widest mb-1">Bab III • Penutup &
+                    Referensi</div>
+                <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-white">Simpulan, Saran & Daftar Pustaka
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-4">
+                <!-- Simpulan & Saran -->
+                <div class="lg:col-span-7 flex flex-col gap-4">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                        <h3 class="font-display font-bold text-lg text-amber-400 mb-2"><i
+                                class="fa-solid fa-check-double mr-2"></i>Simpulan</h3>
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-200 leading-relaxed list-disc pl-5">
+                            <li>Manusia mengandalkan heuristik untuk keputusan cepat, yang memicu bias kognitif
+                                sistematis bahkan pada manajer dan profesional berpengalaman (Berthet, 2022).</li>
+                            <li>Empat bias utama (<i>anchoring, confirmation, availability, sunk-cost</i>) berdampak
+                                nyata pada anggaran, negosiasi, penilaian risiko, dan evaluasi proyek.</li>
+                            <li>Mitigasi efektif memerlukan kombinasi berlapis antara <b>debiasing</b>
+                                (kesadaran/pelatihan) dan <b>choice architecture</b> (<i>decision hygiene</i>,
+                                <i>stage-gate</i>, data dasar).
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                        <h3 class="font-display font-bold text-lg text-amber-400 mb-2"><i
+                                class="fa-solid fa-lightbulb mr-2"></i>Saran Praktis & Akademik</h3>
+                        <ul class="space-y-2 text-xs sm:text-sm text-slate-200 leading-relaxed list-disc pl-5">
+                            <li><b>Budaya Organisasi:</b> Membangun iklim yang menghargai kritik dan melembagakan peran
+                                <i>devil's advocate</i> dalam rapat strategis.
+                            </li>
+                            <li><b>Prosedur Keputusan:</b> Menerapkan <i>checklist</i>, penilaian independen, dan
+                                kriteria berhenti proyek pada keputusan berisiko tinggi.</li>
+                            <li><b>Riset Lanjutan:</b> Menguji efektivitas teknik mitigasi bias menggunakan data
+                                lapangan pada konteks bisnis Indonesia, khususnya sektor <b>UMKM</b>.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Daftar Pustaka -->
+                <div
+                    class="lg:col-span-5 bg-navy-950/70 border border-amber-400/20 rounded-2xl p-5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-display font-bold text-base text-amber-400 uppercase tracking-wider mb-3">
+                            <i class="fa-solid fa-book-bookmark mr-2"></i>Daftar Pustaka Utama
+                        </h3>
+                        <div
+                            class="space-y-2 text-[11px] sm:text-xs text-slate-300 leading-snug max-h-[270px] overflow-y-auto pr-1">
+                            <p>• <b>Adhikari, S. N. (2025).</b> Impact of cognitive bias on the use of management
+                                information systems in Nepalese commercial banks. <i>Journal of Business and
+                                    Management</i>, 9(1), 59–72.</p>
+                            <p>• <b>Ahmed, Z., et al. (2022).</b> Mediating role of risk perception between behavioral
+                                biases and investor’s investment decisions. <i>SAGE Open</i>, 12(2).</p>
+                            <p>• <b>Berthet, V. (2022).</b> The impact of cognitive biases on professionals’
+                                decision-making: A review of four occupational areas. <i>Frontiers in Psychology</i>,
+                                12, 802439.</p>
+                            <p>• <b>Bystranowski, P., et al. (2021).</b> Anchoring effect in legal decision-making: A
+                                meta-analysis. <i>Law and Human Behavior</i>, 45(1), 1–23.</p>
+                            <p>• <b>Fasolo, B., Heard, C., & Scopelliti, I. (2024).</b> Mitigating cognitive bias to
+                                improve organizational decisions. <i>Journal of Management</i>.</p>
+                            <p>• <b>Jain, J., et al. (2023).</b> Heuristic biases as mental shortcuts to investment
+                                decision-making. <i>Risks</i>, 11(4), 72.</p>
+                            <p>• <b>Kahneman, D., Sibony, O., & Sunstein, C. R. (2021).</b> <i>Noise: A flaw in human
+                                    judgment</i>. Little, Brown Spark.</p>
+                            <p>• <b>Knox, B. (2022).</b> Sunk costs and quasi-hyperbolic discounting. <i>Pacific
+                                    Accounting Review</i>, 34(1), 1–22.</p>
+                            <p>• <b>Korteling, J. E., et al. (2021).</b> Retention and transfer of cognitive bias
+                                mitigation interventions. <i>Frontiers in Psychology</i>, 12, 629354.</p>
+                            <p>• <b>Oktaviani, A., & Mawaddah, N. (2023).</b> Young investor’s investment decision
+                                making. <i>Jurnal Akuntansi Aktual</i>, 11(1), 58–72.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/10 text-center">
+                        <p class="font-display font-bold text-sm text-amber-400">Terima Kasih • Kelompok 5 MJ23B SDM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="h-6"></div>
+        </section>
+
+    </main>
+
+    <!-- Floating Bottom Navigation Controls -->
+    <nav
+        class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 sm:gap-3 bg-navy-950/90 backdrop-blur-md border border-white/15 px-3 sm:px-4 py-2 rounded-full shadow-2xl text-white">
+        <button onclick="toggleDrawer()" title="Daftar Isi Slide (M)"
+            class="p-2.5 rounded-full hover:bg-white/10 text-amber-400 transition-colors flex items-center gap-2 text-xs sm:text-sm font-semibold">
+            <i class="fa-solid fa-bars"></i>
+            <span class="hidden sm:inline">Daftar Slide</span>
+        </button>
+
+        <div class="h-5 w-px bg-white/15"></div>
+
+        <button onclick="prevSlide()" id="btnPrev" title="Slide Sebelumnya (Panah Kiri)"
+            class="p-2.5 rounded-full hover:bg-white/10 disabled:opacity-35 disabled:pointer-events-none transition-colors">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="px-2 sm:px-3 font-display font-bold text-xs sm:text-sm tracking-wide text-slate-200">
+            <span id="currentSlideNum" class="text-amber-400">1</span> / <span id="totalSlideNum">12</span>
+        </div>
+
+        <button onclick="nextSlide()" id="btnNext" title="Slide Berikutnya (Panah Kanan)"
+            class="p-2.5 rounded-full hover:bg-white/10 disabled:opacity-35 disabled:pointer-events-none transition-colors">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <div class="h-5 w-px bg-white/15"></div>
+
+        <button onclick="toggleFullscreen()" title="Mode Layar Penuh (F)"
+            class="p-2.5 rounded-full hover:bg-white/10 text-slate-300 hover:text-amber-400 transition-colors">
+            <i id="fullscreenIcon" class="fa-solid fa-expand"></i>
+        </button>
+    </nav>
+
+    <!-- Slide Index Drawer -->
+    <div id="drawerBackdrop" onclick="toggleDrawer()"
+        class="drawer-backdrop fixed inset-0 bg-navy-950/70 backdrop-blur-xs z-50 opacity-0 invisible"></div>
+    <aside id="drawerPanel"
+        class="drawer-panel fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-navy-900 border-r border-white/15 z-50 -translate-x-full flex flex-col text-white shadow-2xl">
+        <div class="p-5 border-b border-white/10 flex items-center justify-between">
+            <div>
+                <p class="text-xs uppercase tracking-wider text-amber-400 font-bold">Navigasi Cepat</p>
+                <h3 class="font-display font-bold text-lg">Daftar Isi Presentasi</h3>
+            </div>
+            <button onclick="toggleDrawer()" class="p-2 rounded-xl hover:bg-white/10 text-slate-300">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+        <div id="slideListContainer" class="flex-1 overflow-y-auto p-3 space-y-1.5">
+            <!-- Populated dynamically via JS -->
+        </div>
+        <div class="p-4 border-t border-white/10 text-xs text-slate-400">
+            Gunakan tombol panah <kbd class="px-1.5 py-0.5 bg-white/10 rounded text-amber-300">←</kbd> <kbd
+                class="px-1.5 py-0.5 bg-white/10 rounded text-amber-300">→</kbd> untuk berpindah slide.
+        </div>
+    </aside>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+        let isDrawerOpen = false;
+
+        const progressBar = document.getElementById('progressBar');
+        const currentSlideNum = document.getElementById('currentSlideNum');
+        const totalSlideNum = document.getElementById('totalSlideNum');
+        const btnPrev = document.getElementById('btnPrev');
+        const btnNext = document.getElementById('btnNext');
+        const slideListContainer = document.getElementById('slideListContainer');
+
+        totalSlideNum.textContent = totalSlides;
+
+        // Build Drawer Slide List
+        function buildSlideList() {
+            slideListContainer.innerHTML = '';
+            slides.forEach((slide, idx) => {
+                const title = slide.getAttribute('data-title') || `Slide ${idx + 1}`;
+                const btn = document.createElement('button');
+                btn.className = `w-full text-left px-3.5 py-2.5 rounded-xl text-sm flex items-center gap-3 transition-colors ${idx === currentIndex
+                    ? 'bg-amber-500 text-navy-950 font-bold'
+                    : 'hover:bg-white/10 text-slate-200'
+                    }`;
+                btn.innerHTML = `
+          <span class="w-6 h-6 rounded-lg ${idx === currentIndex ? 'bg-navy-950 text-amber-400' : 'bg-white/10 text-amber-400'} text-xs font-bold flex items-center justify-center shrink-0">
+            ${idx + 1}
+          </span>
+          <span class="truncate">${title}</span>
+        `;
+                btn.onclick = () => {
+                    goToSlide(idx);
+                    toggleDrawer();
+                };
+                slideListContainer.appendChild(btn);
+            });
+        }
+
+        function updatePresentation() {
+            slides.forEach((slide, idx) => {
+                if (idx === currentIndex) {
+                    slide.classList.add('active');
+                    slide.scrollTop = 0;
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            currentSlideNum.textContent = currentIndex + 1;
+            const progress = ((currentIndex + 1) / totalSlides) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            btnPrev.disabled = currentIndex === 0;
+            btnNext.disabled = currentIndex === totalSlides - 1;
+
+            buildSlideList();
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentIndex = index;
+                updatePresentation();
+            }
+        }
+
+        function nextSlide() {
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updatePresentation();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updatePresentation();
+            }
+        }
+
+        function toggleDrawer() {
+            isDrawerOpen = !isDrawerOpen;
+            const backdrop = document.getElementById('drawerBackdrop');
+            const panel = document.getElementById('drawerPanel');
+            if (isDrawerOpen) {
+                backdrop.classList.remove('opacity-0', 'invisible');
+                panel.classList.remove('-translate-x-full');
+            } else {
+                backdrop.classList.add('opacity-0', 'invisible');
+                panel.classList.add('-translate-x-full');
+            }
+        }
+
+        function toggleFullscreen() {
+            const icon = document.getElementById('fullscreenIcon');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => { });
+                icon.classList.replace('fa-expand', 'fa-compress');
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                    icon.classList.replace('fa-compress', 'fa-expand');
+                }
+            }
+        }
+
+        // Interactive Tabs on Slide 10
+        function selectMitigationTab(tabIndex) {
+            const tabs = document.querySelectorAll('.mitigation-tab');
+            const panels = document.querySelectorAll('.mitigation-panel');
+
+            tabs.forEach((tab, idx) => {
+                const label = tab.querySelector('div:first-child');
+                if (idx === tabIndex) {
+                    tab.classList.remove('bg-white', 'text-navy-900', 'border-slate-200');
+                    tab.classList.add('bg-navy-900', 'text-white', 'border-amber-400', 'shadow-md');
+                    label.classList.remove('text-slate-400');
+                    label.classList.add('text-amber-400');
+                } else {
+                    tab.classList.add('bg-white', 'text-navy-900', 'border-slate-200');
+                    tab.classList.remove('bg-navy-900', 'text-white', 'border-amber-400', 'shadow-md');
+                    label.classList.add('text-slate-400');
+                    label.classList.remove('text-amber-400');
+                }
+            });
+
+            panels.forEach((panel, idx) => {
+                if (idx === tabIndex) {
+                    panel.classList.remove('hidden');
+                } else {
+                    panel.classList.add('hidden');
+                }
+            });
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                if (document.activeElement.tagName !== 'BUTTON') {
+                    nextSlide();
+                }
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key === 'Escape' && isDrawerOpen) {
+                toggleDrawer();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullscreen();
+            } else if (e.key.toLowerCase() === 'm') {
+                toggleDrawer();
+            }
+        });
+
+        // Touch Swipe Support for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const stage = document.getElementById('presentationStage');
+
+        stage.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        stage.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide();
+            }
+        }
+
+        // Initialize
+        updatePresentation();
+    </script>
+</body>
+
+</html>
